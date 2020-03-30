@@ -33,9 +33,9 @@ public class MyListener implements Listener{
 	public void onRegister(RegisterAddonEvent e) {
 		//LOAD HERE
 		Translations.load(MyConfig.class);
-		if(Translations.ECONOMY) {
+		if(Translations.ECONOMY) { //check if economy is enabled
 			if(MyConfig.DO_SELL_COCAINE)
-				Shop.registerItem(new ShopItem(MyItems.COCAINE, -1, MyConfig.BUY_COCAINE, Translations.SHOP_CURRENCY));
+				Shop.registerItem(new ShopItem(MyItems.COCAINE, -1, MyConfig.BUY_COCAINE, Translations.SHOP_CURRENCY)); //register the item
 			if(MyConfig.DO_SELL_CUSTOMBLOCK)
 				Shop.registerItem(new ShopItem(MyItems.CUSTOM_BLOCK, -1, MyConfig.BUY_CUSTOMBLOCK, Translations.SHOP_CURRENCY));
 		}
