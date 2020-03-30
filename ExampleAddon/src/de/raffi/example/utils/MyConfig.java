@@ -13,5 +13,13 @@ public class MyConfig {
 	public static String ITEM_NAME_COCAINE = "§7Cocaine";
 	@Configurable
 	public static String BLOCK_NAME_EXAMPLE = "§7Example block";
+	@Configurable(Files.SHOP)
+	public static boolean DO_SELL_COCAINE = true;
+	@Configurable(Files.SHOP)
+	public static boolean DO_SELL_CUSTOMBLOCK = true;
+	@Configurable(Files.SHOP)
+	public static double BUY_COCAINE = 50000;
+	@Configurable(Files.SHOP)
+	public static double BUY_CUSTOMBLOCK = 50000;
 
 }

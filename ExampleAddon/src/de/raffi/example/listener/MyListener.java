@@ -10,6 +10,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import de.raffi.druglabs.economy.Shop;
+import de.raffi.druglabs.economy.ShopItem;
 import de.raffi.druglabs.event.FunctionblockAddEvent;
 import de.raffi.druglabs.event.FunctionblockDestroyEvent;
 import de.raffi.druglabs.event.FunctionblockInteractEvent;
@@ -31,6 +33,13 @@ public class MyListener implements Listener{
 	public void onRegister(RegisterAddonEvent e) {
 		//LOAD HERE
 		Translations.load(MyConfig.class);
+		if(Translations.ECONOMY) {
+			if(MyConfig.DO_SELL_COCAINE)
+				Shop.registerItem(new ShopItem(MyItems.COCAINE, -1, MyConfig.BUY_COCAINE, Translations.SHOP_CURRENCY));
+			if(MyConfig.DO_SELL_CUSTOMBLOCK)
+				Shop.registerItem(new ShopItem(MyItems.CUSTOM_BLOCK, -1, MyConfig.BUY_CUSTOMBLOCK, Translations.SHOP_CURRENCY));
+		}
+		
 	}
 	@EventHandler
 	public void onAdd(FunctionblockAddEvent e) {
@@ -52,12 +61,15 @@ public class MyListener implements Listener{
 	}
 	@EventHandler
 	public void onAdd(FunctionblockInteractEvent e) {
-		e.getPlayer().sendMessage("§cYou are not allowed to interact with this block!");
-		e.setCancelled(true); //cancels block interaction
+		if(e.getBlock() instanceof MyCustomBlock) {
+			e.getPlayer().sendMessage("§cYou are not allowed to interact with this block!");
+			e.setCancelled(true); //cancels block interaction
+		}
+		
 	}
 	@EventHandler
 	public void onCreate(InventoryCreationEvent e) {
-		if(e.getType()==Type.ADMIN_INVENTORY||e.getType()==Type.DRUGSTORE) {
+		if(e.getType()==Type.ADMIN_INVENTORY) {
 			e.getInventory().addItem(MyItems.COCAINE);
 			e.getInventory().addItem(MyItems.CUSTOM_BLOCK);
 		}
