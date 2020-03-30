@@ -21,10 +21,10 @@ public class TripCocaine extends Trip{
 	}
 	@Override
 	public void runTrip() {
-		//dont do things here
-		super.runTrip();
 		//do things here
 		getPlayer().setVelocity(getPlayer().getLocation().getDirection().multiply(0.4f).normalize());
+		super.runTrip();
+		//do not things here
 	}
 
 }
